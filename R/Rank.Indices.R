@@ -1,55 +1,62 @@
 #'
-#' Rank indices according to the areas' absolute position.
-#' If the index value is empty, the function assigns a dummy position "X0X"
+#' @title Rank indices according to the areas' absolute position.
+#' 
+#' @description If the index value is empty, the function assigns a dummy position "X0X"
 #'
-#' Input a data matrix with the index values
-#' Return a table with the dreacins order of the areas
-#' It presents the ties alphabetically
+#' @param index.value enter the table with these values.
+#' 
+#' @return a table with the decreasing order of the areas
+#' It presents the ties alphabetically 
+#' 
 
 Rank.Indices <-
 function (index.Value=index.Value) {
  
-	ranking <- NULL
-	areas <- length(index.Value$area)
+ ranking <- NULL
+    
+ areas <- length(index.Value$area)
  
- 
-	if (max(index.Value$I) > 0){
+	if (?max(index.Value$I) > 0){
 		ranking$I <- index.Value$area[order(index.Value$I, decreasing = T)]
 		}else{
 		ranking$I[1:areas] <- "X0X"  
 	}
-  
-  
+
+    
 	if (max(index.Value$Ie) > 0){
 		ranking$Ie <- index.Value$area[order(index.Value$Ie, decreasing = T)]
 		}else{
 		ranking$Ie[1:areas] <- "X0X"  
 	}
  
- 
+    
 	if (max(index.Value$Is) > 0){
 		ranking$Is <- index.Value$area[order(index.Value$Is, decreasing = T)]
 		}else{
 		ranking$Is[1:areas] <- "X0X"  
 	}
+
  
-	if (max(index.Value$Ise) > 0){
+ 	if (max(index.Value$Ise) > 0){
 		ranking$Ise <- index.Value$area[order(index.Value$Ise, decreasing = T)]
 		}else{
 		ranking$Ise[1:areas] <- "X0X"  
 	}
  
+   
 	if (max(index.Value$W) > 0){
 		ranking$W <- index.Value$area[order(index.Value$W, decreasing = T)]     
 		}else{
 		ranking$W[1:areas] <- "X0X"  
 	}
- 
+
+   
 	if (max(index.Value$We) > 0){
 		ranking$We <- index.Value$area[order(index.Value$We, decreasing = T)]  
 		}else{
 		ranking$We[1:areas] <- "X0X"  
 	}
+ 
  
 	if (max(index.Value$Ws) > 0){
 		ranking$Ws <- index.Value$area[order(index.Value$Ws, decreasing = T)]   
@@ -65,7 +72,7 @@ function (index.Value=index.Value) {
  
 	ranking$rich <- index.Value$area[order(index.Value$rich, decreasing = T)]
  
-	ranking$endem <- index.Value$area[order(index.Value$endem, decreasing = T)]
+  ranking$endem <- index.Value$area[order(index.Value$endem, decreasing = T)]
  
  return(ranking)
  

@@ -1,12 +1,13 @@
 #'
 #' @title I index value for a single topology.
 #'
-#' This function assigns the same weight to sister clades
-#' (see Van-Wright et al., 1981). 
-#' The input tree is reordered in post order.
+#' @description This function assigns the same weight to sister clades
+#' (see Van-Wright et al., 1981). The input tree is reordered in post order.
 #' 
-#' Returns a vector with weights.
+#' @param tree is a single tree with n terminals, an ape phylo object.
 #'
+#' @return Returns a vector with weights.
+#' 
 #' @examples
 #'  library(jrich)
 #'  data(tree)
@@ -15,7 +16,7 @@
 #'  newTree              <- tree
 #'  newTree$tip.label    <- indexi
 #'  plot(newTree)
-
+#'  
 
 IndexI <- function(tree=tree) {
   
@@ -23,16 +24,7 @@ IndexI <- function(tree=tree) {
     
   matriz = matrix(0,nrow=1,ncol=(length(tree$tip.label)*2-1))
    
-
-## masked functions
-
-	#'
-	#' All the sisters of a node
-	#' 
-	#' Input: a tree and a node
-	#' Returns the list of sisters
-
-	Sisters <-
+Sisters <-
 		function (tree=tree, node=node) {
   
   		# get the ancestor
@@ -44,40 +36,19 @@ IndexI <- function(tree=tree) {
   	return(sisters)
 	}
 
-
-	#' Are all the sisters of a node tips?
-	#'
-	#' Input: a tree and a node
-	#' Return a boolean
-
 	Sisters.tip <-
 		function (tree=tree, node=node) {
-  		##
-  		## recibe un arbol y un nodo y reporta si todos los hijos del ANCESTRO de ese nodo
-  		## son tips
-  		##  
-  
+  		  
   	if (all(Sisters(tree,node) <= length(tree$tip.label))) {
     	return(TRUE)
-  		}else{
+  		} else {
     return(FALSE)
   		}  
   
 	}
 
-
-
-	#' Weight the tips that are sisters of tips
-	#'
-	#' Input: a tree and a table of weights
-	#' Returns a distribution
-	#
-
 	Weight.sister.tips <-
 	function (tree=tree, matriz=matriz) {
-  
-  		## llena de 1 la matriz de pesos iniciales 
-  		## para terminales hermanas
   
   	for (node in 1:length(tree$tip.label)){
     	if ((node <= length(tree$tip.label)) & Sisters.tip(tree,node)){
@@ -92,18 +63,9 @@ IndexI <- function(tree=tree) {
   	return(matriz)
 	}
 
-
-	#' Weight the tips that are sisters of internal nodes
-	#'
-	#' Input: a tree and a table of weights
-	#' Returns a distribution
-	#
-
 	Weight.other.nodes <-
 	function (tree=tree,matriz=matriz) {
-  
-  		## recorrer los tips para asignar pesos que no han sido asignados
-  
+    		  
   	for (i in ((length(tree$tip)+tree$Nnode):(length(tree$tip)+1))){
     
     	if((any(Children(tree=tree,node=i) <= length (tree$tip.label))) &
@@ -119,8 +81,6 @@ IndexI <- function(tree=tree) {
   	return(matriz[1,1:length(tree$tip)])
   
 	}
-
-
   
 #! pares de tips como 1
   matriz <- Weight.sister.tips(tree,matriz)

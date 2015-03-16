@@ -1,8 +1,15 @@
 #'
-#' Sums two tables with indices values
+#' @title Sums two tables with indices values
 #' 
-#' Input: two tables with indices
-#' Returns a single table with the sum
+#' @description You input two tables with indices 
+#' and it function returns a single table with the sum.
+#' 
+#' @param indices1
+#' 
+#' @param indices2
+#' 
+#' @return a single table with the sum of the two indices.
+#' 
 
 Sum.Indices.2.Topologies <-
 function (indices1=indices1, indices2=indices2) {
@@ -16,6 +23,7 @@ function (indices1=indices1, indices2=indices2) {
   all.Areas <- (sort(union(indices1$area, indices2$area)))
 
   table.Sum <- as.data.frame(matrix(data=0,nrow=length(all.Areas),ncol=13))
+  
   names(table.Sum) <- c("area","I","Ie","Is","Ise","W","We","Ws","Wse","rich","endem","jtopol","jtip")
   
   table.Sum$area <- all.Areas

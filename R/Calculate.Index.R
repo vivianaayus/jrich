@@ -1,28 +1,39 @@
 #'
+#' @title
 #' Indices values and Jack-knife indices for a single topology.
 #'
+#' @description
 #' The funtion calculates standard and terminal jack-knifed indices I and W 
 #' [see Miranda-Esquivel 2015], along with Posadas et al. 2001 modifications.
-#'
+#' 
+#' @param tree is a single tree with n terminals, an ape phylo object.
+#' 
+#' @param distrib species distributions in n areas, a data.frame
+#' 
+#' @param jtip is the number of terminals, an integer.
+#' 
+#' @param verbose
+#' 
+#' @param standard
+#' 
 #' @examples
 #' library(jrich)
 #' data(tree)
 #' data(distribution)
 #' ##
-#' ## Standarized by the sum of indices in the distribution
+#' Standarized by the sum of indices in the distribution
 #' Calculate.Index(tree=tree, distrib = distribution, verbose=TRUE, standard = "distribution")
 #' 
-#' ##
 #' ## Standarized by the sum of indices in the tree (as figure 1 in Miranda-Esquivel 2015)
 #' Calculate.Index(tree=tree, distrib = distribution, verbose=TRUE, standard = "tree")
 #' 
-
 
 Calculate.Index <- function (tree = tree, distrib = distrib, jtip = 0, verbose = TRUE, standard = "distribution") {
 
   ## Errors on trees / distributions
   ## names and numbers
   
+      # Si el nombre es (especie) asignar ahora 'species'
     if (names(distrib)[1]=="especie"){
     names(distrib)[1] <- "species"
     }
@@ -46,7 +57,9 @@ Calculate.Index <- function (tree = tree, distrib = distrib, jtip = 0, verbose =
   	for (i in 1:length(especies)){
     
     	if (jtip > runif(1)) {
+          #
         	#! print(paste("especie ",especies[i]," sera borrada",sep=""))
+          #
       	deleted.Terminals    <-  deleted.Terminals + 1
             
         distrib[i,-(length(areas)+1)] <- rep (0,length(areas))

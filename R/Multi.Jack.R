@@ -1,10 +1,18 @@
 #'
-#' @title Jack-knife indices in n topologies  m times
+#' @title Jack-knife indices in n topologies m times.
 #'
 #' @description
 #' The function calculates the indices values for a MultiData list  m (=replicates) times 
 #'
-#' Returns the rankings
+#' @param MultiData
+#' 
+#' @param times
+#'
+#' @param jtip is the number of terminals, an integer.
+#'
+#' @param jtopol is the number of topologies, an integer.
+#'
+#' @returns the rankings
 #'
 
 Multi.Jack <- 

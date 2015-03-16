@@ -1,11 +1,12 @@
 #'
-#' W index value for a single topology
+#' @title W index value for a single topology
 #'
-#' This function assigns the weight according to the ramification patters 
+#' @description This function assigns the weight according to the ramification patterns 
 #' (see Van-Wright et al., 1981). 
 #' The input tree is reordered in post order.
-#' 
 #' Returns a vector with weights.
+#' 
+#' @param tree is a single tree with n terminals, an ape phylo object.
 #'
 #' @examples
 #'   library(jrich)
@@ -17,16 +18,18 @@
 #'   plot(newTree)
 #'   
 
-
 IndexW <- function (tree=tree) {
 
-	## masked functions
-
 #'
-#' Ancestor of a node
+#' @rdname Ancestor of a node
 #'
-#' Input: a tree and a node
-#' Returns the ancestor of that node
+#' @description Returns the ancestor of that node
+#' 
+#' @param tree is a single tree with n terminals.
+#' 
+#' @param node is an integer, representing the node in APE notation
+#'
+#'@return node.Matrix
 #'
 
 	Ancestor <- function (tree=tree,node=node) {
@@ -37,8 +40,6 @@ IndexW <- function (tree=tree) {
   
 	}
 
-
-  
   node.Matrix  <-  matrix(0,nrow=1,ncol=(length(tree$tip.label)*2-1))
   
   tree <- reorder.phylo(tree,order="postorder")
